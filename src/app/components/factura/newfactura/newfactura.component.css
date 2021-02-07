@@ -1,0 +1,149 @@
+.titulo {
+    text-transform: uppercase;
+    background: #0dcaf0;
+    border-radius: 3px;
+    padding: 5px;
+    margin-bottom: 15px;
+    height: 35px;
+}
+
+.h3titulo {
+    text-align: center;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.row {
+    margin-bottom: 10px;
+}
+
+i {
+    margin-right: 5px;
+}
+
+.rutasboton {
+    margin-top: 20px;
+}
+
+.header1 {
+    text-transform: uppercase;
+}
+
+.modal63 {
+    padding: 10px;
+}
+
+.footer114 {
+    padding: 10px;
+}
+
+.modal132 {
+    background: #0dcaf0;
+    border-radius: 3px;
+    padding: 10px;
+}
+
+.modal133 {
+    text-transform: uppercase;
+}
+
+.icon134 {
+    margin-right: 5px;
+}
+
+.footer181 {
+    padding: 10px;
+}
+
+.tabla222 {
+    width: 180px;
+}
+
+.tabla223 {
+    width: 400px;
+}
+
+.tabla224 {
+    width: 70px;
+}
+
+.tabla225 {
+    width: 180px;
+}
+
+.icono240 {
+    height: 35px;
+    width: 35px;
+    padding: 9px;
+}
+
+.margen58 {
+    margin-top: 8px;
+}
+
+.dialog {
+    display: flex;
+    justify-content: center;
+}
+
+.botondialogo {
+    margin-right: 8px;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+}
+
+.botoncliente {
+    margin-right: 7px;
+}
+
+::placeholder {
+    color: rgb(175, 171, 171);
+}
+
+.espaciospan {
+    width: 600px;
+    height: 40px;
+}
+
+.center150 {
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 20px;
+    margin-top: 2px;
+}
+
+.row53 {
+    margin-top: 15px;
+    margin-bottom: -10px;
+}
+
+.h3producto54 {
+    text-align: center;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+.row56 {
+    margin-bottom: 10px;
+}
+
+.autocompl58 {
+    margin-bottom: 5px;
+}
+
+.botones80 {
+    margin-top: 25px;
+}
+
+.detalle133 {
+    width: 35vw;
+    height: 30px;
+}
+
+.tabla68 {
+    margin-bottom: 40px;
+}

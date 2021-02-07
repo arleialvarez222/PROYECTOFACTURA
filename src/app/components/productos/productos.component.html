@@ -1,0 +1,233 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 minipuu">
+            <div class="col-sm-10">
+                <h3 class="header1">
+                    <i class="fas fa-apple-alt espacio"></i>Productos en almacen
+                </h3>
+            </div>
+
+            <div class="row">
+                <button type="button" class="btn btn-primary" (click)="showDialog()" icon="pi pi-info-circle" label="Show">
+                        <i class="fa fa-plus-square espacio " aria-hidden="true"></i>Nuevo producto
+                    </button>
+            </div>
+
+        </div>
+    </div>
+    <div class="row ">
+        <div class="col-md-2 labelclas">
+            <label for="" class="form-label">Buscar producto:</label>
+        </div>
+        <div class="col-md-6">
+            <input [(ngModel)]="filtroProducts3" type="text" class="form-control" id="filtroProducts3" name="filtroProducts3" placeholder="Nombre de producto" required>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary" type="button">
+                <i class="fa fa-search espacio" aria-hidden="true"></i>Buscar
+            </button>
+        </div>
+    </div>
+
+    <div class="row rowdos">
+        <div class="col-sm-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">P.C</th>
+                        <th scope="col">P.V</th>
+                        <th scope="col">P.Act</th>
+                        <th scope="col">P.Min</th>
+                        <th scope="col">P.Max</th>
+                        <th scope="col">F.V</th>
+                        <th scope="col">Cat.Id</th>
+                        <th scope="col">Accion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of products | pagination: page_size:page_number | filtroBusqueda:filtroProducts3">
+                        <td scope="row"> {{ item.id }} </td>
+                        <td> {{ item.nombre | capitalizado:false }} </td>
+                        <td> {{ item.cantidad }} </td>
+                        <td> {{ item.precioCompra | currency: '$ ':'symbol':'.0-0' }} </td>
+                        <td> {{ item.precioVenta | currency: '$ ':'symbol':'.0-0' }} </td>
+                        <td> {{ item.precioActual | currency: '$ ':'symbol':'.0-0' }} </td>
+                        <td> {{ item.precioMinimo | currency: '$ ':'symbol':'.0-0' }} </td>
+                        <td> {{ item.precioMaximo | currency: '$ ':'symbol':'.0-0' }} </td>
+                        <td> {{ item.fechaVencimiento | date : 'dd-MM-yyyy'}} </td>
+                        <td> {{ item.categoriaId }} </td>
+                        <td>
+                            <i (click)="abrirEditProduct(item)" class="fas fa-edit btn btn-outline-primary espacio1">
+                            </i>
+                            <i (click)="deleteProduct(item)" class="fas fa-trash-alt btn btn-outline-danger espacio1"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="paginacion">
+        <mat-paginator [length]="products.length" [pageSize]="page_size " [pageSizeOptions]="pageSizeOptions" (page)="handlePage($event)" showFirstLastButtons>
+        </mat-paginator>
+    </div>
+
+    <div class="dialog">
+        <p-dialog [(visible)]="display" [style]="{width: '50vw'}">
+            <p-header>
+                <div class="btn btn-info text-center">
+                    <h5 class="modal-title header1" id="">
+                        <i class="fa fa-plus-square espacio " aria-hidden="true"></i>Agregar nuevo producto
+                    </h5>
+                </div>
+            </p-header>
+            <form #f="ngForm">
+                <div class="form-group row">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="nombre" class="form-label">Nombre:</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="product.nombre" #nombre="ngModel" placeholder="Nombre de producto" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="cantidad" class="form-label">Cantidad:</label>
+                            <input type="number" class="form-control" id="cantidad" name="cantidad" [(ngModel)]="product.cantidad" #cantidad="ngModel" placeholder="Cantidad adquirida" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="col-md-12">
+                                <label for="precioCompra" precio venta class="form-label">Precio C:</label>
+                                <input type="number" class="form-control" id="precioCompra" name="precioCompra" [(ngModel)]="product.precioCompra" #precioCompra="ngModel" placeholder="precio de compra" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="col-md-12">
+                                <label for="PrecioVenta" class="form-label">Precio V:</label>
+                                <input type="number" class="form-control" id="PrecioVenta" name="precioVenta" [(ngModel)]="product.precioVenta" #precioVenta="ngModel" placeholder="Precio de venta" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="col-md-12">
+                                <label for="precioActual" class="form-label">Precio Act:</label>
+                                <input type="number" class="form-control" id="precioActual" name="precioActual" [(ngModel)]="product.precioActual" #precioActual="ngModel" placeholder="Precio actual" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="col-md-12">
+                                <label for="precioMinimo" class="form-label">Precio Min:</label>
+                                <input type="number" class="form-control" id="precioMinimo" name="precioMinimo" [(ngModel)]="product.precioMinimo" #precioMinimo="ngModel" placeholder="Precio minimo" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="col-md-12">
+                                <label for="precioMaximo" class="form-label">Precio Max:</label>
+                                <input type="number" class="form-control" id="precioMaximo" name="precioMaximo" [(ngModel)]="product.precioMaximo" #precioMaximo="ngModel" placeholder="Precio máximo" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="col-md-12">
+                                <label for="fechav" class="form-label">Fecha V:</label>
+                                <input type="date" class="form-control" id="fechav" name="fechaVencimiento" [(ngModel)]="product.fechaVencimiento" #fechaVencimiento="ngModel" placeholder="Fecha de vencimiento" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="col-md-12">
+                                <label for="categoriaId" class="form-label">Categoria Id:</label>
+                                <input type="number" class="form-control" id="categoriaId" name="categoriaId" [(ngModel)]="product.categoriaId" #categoriaId="ngModel" placeholder="Numero de la categoria" required>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="reset" class="btn btn-success">Nuevo producto</button>
+                    <button type="submit" name="submit1" class="btn btn-info" (click)="saveproduct(f)">Guardar</button>
+                    <button type="button" name="submit2" class="btn btn-danger" (click)="limpiarForm()">volver</button>
+                </div>
+            </form>
+        </p-dialog>
+    </div>
+    <p-dialog [(visible)]="displayModal" [style]="{width: '40vw'}">
+        <p-header>
+            <h3><i class="fas fa-edit espacio"></i>EDITAR PRODUCTO</h3>
+        </p-header>
+        <div class="form-group row">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="nombre" class="form-label">Nombre:</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="productDialog.nombre" #nombre="ngModel" placeholder="Nombre de producto" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="cantidad" class="form-label">Cantidad:</label>
+                    <input type="number" class="form-control" id="cantidad" name="cantidad" [(ngModel)]="productDialog.cantidad" #cantidad="ngModel" placeholder="Cantidad adquirida" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="col-md-12">
+                        <label for="precioCompra" precio venta class="form-label">Precio C:</label>
+                        <input type="number" class="form-control" id="precioCompra" name="precioCompra" [(ngModel)]="productDialog.precioCompra" #precioCompra="ngModel" placeholder="precio de compra" required>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="col-md-12">
+                        <label for="PrecioVenta" class="form-label">Precio V:</label>
+                        <input type="number" class="form-control" id="PrecioVenta" name="precioVenta" [(ngModel)]="productDialog.precioVenta" #precioVenta="ngModel" placeholder="Precio de venta" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="col-md-12">
+                        <label for="precioActual" class="form-label">Precio Act:</label>
+                        <input type="number" class="form-control" id="precioActual" name="precioActual" [(ngModel)]="productDialog.precioActual" #precioActual="ngModel" placeholder="Precio actual" required>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="col-md-12">
+                        <label for="precioMinimo" class="form-label">Precio Min:</label>
+                        <input type="number" class="form-control" id="precioMinimo" name="precioMinimo" [(ngModel)]="productDialog.precioMinimo" #precioMinimo="ngModel" placeholder="Precio minimo" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="col-md-12">
+                        <label for="precioMaximo" class="form-label">Precio Max:</label>
+                        <input type="number" class="form-control" id="precioMaximo" name="precioMaximo" [(ngModel)]="productDialog.precioMaximo" #precioMaximo="ngModel" placeholder="Precio máximo" required>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="col-md-12">
+                        <label for="fechaVencimiento" class="form-label">Fecha V:</label>
+                        <input type="date" class="form-control" id="fechaVencimiento" name="fechaVencimiento" [(ngModel)]="productDialog.fechaVencimiento" #fechaVencimiento="ngModel" placeholder="Fecha de vencimiento" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="col-md-12">
+                        <label for="categoriaId" class="form-label">Categoria Id:</label>
+                        <input type="number" class="form-control" id="categoriaId" name="categoriaId" [(ngModel)]="productDialog.categoriaId" #categoriaId="ngModel" placeholder="Numero de la categoria" required>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <p-footer>
+            <button (click)="guardarEdicProduct()" class="btn btn-primary" type="button">
+                <i class="fas fa-save espacio"></i>Guardar producto
+            </button>
+        </p-footer>
+    </p-dialog>
+</div>

@@ -1,0 +1,85 @@
+.rowdos {
+    margin-top: 10px;
+}
+
+.datoempresa {
+    text-transform: uppercase;
+    font-size: 25px;
+    letter-spacing: 1px;
+    background: #0dcaf0;
+    border-radius: 3px;
+    margin-right: 10px;
+}
+
+.img {
+    width: 250px;
+    height: 250px;
+}
+
+.claslabel {
+    margin-top: 6px;
+}
+
+.espaciado {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.boton {
+    align-items: center;
+    padding: 10px;
+    width: 752px;
+    margin-left: 60px;
+}
+
+.formu {
+    margin-right: 0px;
+}
+
+::placeholder {
+    color: rgb(175, 171, 171);
+}
+
+.tabla {
+    margin-top: 40px;
+}
+
+.tabla86 {
+    width: 80px;
+}
+
+.tabla87 {
+    width: 150px;
+}
+
+.tabla88 {
+    width: 110px;
+}
+
+.tabla89 {
+    width: 200px;
+}
+
+.tabla90 {
+    width: 130px;
+}
+
+.tabla92 {
+    width: 120px;
+}
+
+.iconos {
+    margin-right: 8px;
+}
+
+.espacio {
+    margin-right: 7px;
+}
+
+button {
+    letter-spacing: 1px;
+}
+
+table {
+    margin-bottom: 50px;
+}

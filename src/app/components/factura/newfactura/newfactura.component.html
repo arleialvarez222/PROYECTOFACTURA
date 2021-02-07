@@ -1,0 +1,166 @@
+<div class="container">
+    <div class="row titulo">
+        <div class="col-sm-12">
+            <h3 class="h3titulo">
+                <i class="fas fa-edit"></i>Nueva factura
+            </h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <form #f="ngForm">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="clienteId" class="form-label">Nombre del cliente:</label>
+                        <select class="form-control " name="clienteId" [(ngModel)]="facturaBase.clienteId">
+                    <option>...</option>
+                    <option *ngFor="let item of clienteBase" value="{{item.id}}"> {{ item.nombre }} {{ item.apellido }} </option>
+                    </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="empleadoId" class="form-label">Nombre del empleado:</label>
+                        <select class="form-control " name="empleadoId" [(ngModel)]="facturaBase.empleadoId">
+                    <option>...</option>
+                    <option *ngFor="let item of empleadoBase" value="{{item.id}}"> {{ item.nombre }} {{ item.apellido }} </option>
+                    </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row row56">
+                <div class="row row53">
+                    <h3 class="h3producto54">Seleccionar producto</h3>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group ">
+                        <label for="productosId" class="form-label autocompl58">Seleccionar producto</label>
+                        <select class="form-select" name="productosId" [(ngModel)]="facturasProd.productosId" (change)="buscarProduct($event)">
+                        <option *ngFor="let item of newProduct1" value="{{item.id}}">{{item.nombre}} </option>
+                    </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group ">
+                        <label for="cantidad" class="form-label autocompl58">Cantidad:</label>
+                        <input type="number" name="cantidad" [(ngModel)]="facturasProd.cantidad" class="form-control" id="cantidad" name="cantidad" placeholder="00" required>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group ">
+                        <label for="precioVenta" class="form-label autocompl58">Precio:</label>
+                        <input type="number" name="precio" [(ngModel)]="facturasProd.precio" class="form-control" id="precioVenta" name="precioVenta" placeholder="$000" required>
+                    </div>
+                </div>
+                <div class="col-md-3 botones80">
+                    <button type="button" class="btn btn-primary botondialogo" (click)="addToProductList(f)">
+                    <i class="fa fa-plus-square espacio " aria-hidden="true"></i>Agregar
+                  </button>
+                    <button type="button" class="btn btn-success botondialogo" (click)="saveFactura()">
+                    <i class="fas fa-print"></i>Guardar
+                  </button>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table table-ligth table-hover tabla68" id="miTabla">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Total</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of detalleFactura">
+                            <td scope="row"> {{ item.productosId }} </td>
+                            <td> {{ item.nombreProducto }} </td>
+                            <td> {{ item.cantidad }} </td>
+                            <td> {{ item.precio | currency }} </td>
+                            <td> {{ item.cantidad * item.precio | currency }} </td>
+                            <td>
+                                <i (click)="abrirEditDetalle(item)" class="fas fa-edit btn btn-outline-success espacio1"></i>
+                                <i (click)="deleteDetalleFactura(item)" class="fas fa-trash-alt btn btn-outline-danger espacio1"></i>
+                            </td>
+                        </tr>
+                        <ng-container *ngIf="detalleFactura.length > 0">
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>SUBTOTAL $</td>
+                                <td>{{ totalN | currency }}</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>IVA(19%)$</td>
+                                <td> {{ iva | currency }} </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>TOTAL $</td>
+                                <td> {{ facturaBase.total | currency }} </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <p-dialog [(visible)]="facturaProducModal" [style]="{width: '40vw'}">
+            <p-header>
+                <div class="col-md-12">
+                    <div class="btn btn-info detalle133">
+                        <h5 class="modal-title header1" id="">
+                            <i class="fa fa-plus-square espacio " aria-hidden="true"></i>Editar detalle
+                        </h5>
+                    </div>
+                </div>
+            </p-header>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group ">
+                        <label for="productosId" class="form-label autocompl58">Producto</label>
+                        <input type="text" class="form-control" [(ngModel)]="facturasProdModal.nombreProducto" disabled>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group ">
+                        <label for="cantidad" class="form-label autocompl58">Cantidad:</label>
+                        <input type="number" [(ngModel)]="facturasProdModal.cantidad" class="form-control" id="cantidad" name="cantidad" placeholder="00" required>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group ">
+                        <label for="precioVenta" class="form-label autocompl58">Precio:</label>
+                        <input type="number" [(ngModel)]="facturasProdModal.precio" class="form-control" id="precioVenta" name="precioVenta" placeholder="$000" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 ">
+                <div class="row">
+                    <button type="button" class="btn btn-info boton" (click)="updateDetalle(facturasProdModal)">Guardar</button>
+                </div>
+            </div>
+        </p-dialog>
+    </div>

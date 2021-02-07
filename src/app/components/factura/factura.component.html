@@ -1,0 +1,60 @@
+<div class="container ">
+    <div class="row">
+        <div class="col-sm-12 minipuu">
+            <div class="col-sm-10">
+                <h3 class="header1">
+                    <i class="fa fa-search header2" aria-hidden="true"></i>Buscar factura
+                </h3>
+            </div>
+            <div class="col-sm-2 espacio">
+                <a class="btn btn-primary" [routerLink]="['/newfactura']">
+                    <i class="fa fa-plus-square " aria-hidden="true"></i> Nueva factura
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row ">
+        <div class="col-md-2 labelclas">
+            <label for="" class="form-label">Buscar factura:</label>
+        </div>
+        <div class="col-md-6">
+            <input type="text" class="form-control" id="" placeholder="Nombre de cliente" required>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary" type="button">
+                <i class="fa fa-search header2" aria-hidden="true"></i>Buscar
+            </button>
+        </div>
+    </div>
+    <div class="row rowdos">
+        <div class="col-sm-12">
+            <table class="table table-ligth table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Empleado</th>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Total</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of factura2 | pagination: page_size:page_number">
+                        <td scope="row"> {{ item.id }} </td>
+                        <td>{{ item.empleadoId }}</td>
+                        <td>{{ item.clienteId }}</td>
+                        <td>{{ item.total }}</td>
+                        <td>
+                            <!-- <i class="fas fa-edit btn btn-outline-primary iconfactura"></i> -->
+                            <i (click)=" deleteFactura(item)" class="fas fa-trash-alt btn btn-outline-danger iconfactura"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="paginacion">
+        <mat-paginator [length]="factura2.length" [pageSize]="page_size " [pageSizeOptions]="pageSizeOptions" (page)="handlePage($event)" showFirstLastButtons>
+        </mat-paginator>
+    </div>
+</div>

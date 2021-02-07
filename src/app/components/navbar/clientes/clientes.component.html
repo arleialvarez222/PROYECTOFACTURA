@@ -1,0 +1,189 @@
+<div class="container ">
+    <div class="row">
+        <div class="col-sm-12 padre">
+            <div class="col-sm-10">
+                <h3 class="header1">
+                    <i class="fa fa-search header" aria-hidden="true"></i>Buscar cliente
+                </h3>
+            </div>
+            <div class="col-sm-2 margen">
+                <button type="button" class="btn btn-primary" (click)="showDialog()" icon="pi pi-info-circle" label="Show">
+                    <i class="fas fa-user-plus espacio"></i>Nuevo cliente
+                </button>
+
+            </div>
+        </div>
+    </div>
+    <div class="row ">
+        <div class="col-md-2 labelclas">
+            <label for="cliente" class="form-label">Buscar cliente:</label>
+        </div>
+        <div class="col-md-6">
+            <input type="text" class="form-control" id="cliente" placeholder="Nombre de cliente" required>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary" type="button">
+                <i class="fa fa-search header" aria-hidden="true"></i>Buscar
+            </button>
+        </div>
+    </div>
+    <div class="row rowdos">
+        <div class="col-sm-12">
+            <table class="table table-ligth table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Direccion</th>
+                        <th scope="col">Telefono</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of clientes2 | pagination: page_size:page_number">
+                        <td scope="row"> {{ item.id }} </td>
+                        <td> {{ item.nombre | capitalizado:false }} </td>
+                        <td> {{ item.apellido | capitalizado:false }} </td>
+                        <td> {{ item.direccion | capitalizado:false }} </td>
+                        <td> {{ item.telefono }} </td>
+                        <td> {{ item.email }} </td>
+                        <td>
+                            <i (click)="openEditCliente(item)" class="fas fa-edit btn btn-outline-primary iconusuario"></i>
+                            <i (click)="deleteCliente(item)" class="fas fa-trash-alt btn btn-outline-danger iconusuario"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="paginacion">
+        <mat-paginator [length]="clientes2.length" [pageSize]="page_size " [pageSizeOptions]="pageSizeOptions" (page)="handlePage($event)" showFirstLastButtons>
+        </mat-paginator>
+    </div>
+    <p-dialog [(visible)]="display" [style]="{width: '50vw'}">
+        <p-header>
+            <div class="btn btn-info text-center">
+                <h5 class="modal-title header1" id="">
+                    <i class="fa fa-plus-square espacio " aria-hidden="true"></i>Agregar nuevo cliente
+                </h5>
+            </div>
+        </p-header>
+        <form #f="ngForm">
+            <div class="form-group row">
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="nombre" class="form-label claselabel">Nombre:</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="cliente1.nombre" #nombre="ngModel" placeholder="Ingresar nombre" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="apellido" class="form-label claselabel">Apellido:</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="apellido" name="apellido" [(ngModel)]="cliente1.apellido" #apellido="ngModel" placeholder="Ingresar apellido" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="direccion" class="form-label claselabel">Direccion:</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="direccion" name="direccion" [(ngModel)]="cliente1.direccion" #direccion="ngModel" placeholder="Ingresar direccion" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="telefono" class="form-label claselabel">Telefono:</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="number" class="form-control" id="telefono" name="telefono" [(ngModel)]="cliente1.telefono" #telefono="ngModel" placeholder="Ingresar telefono" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <label for="email" class="form-label claselabel">Correo:</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="email" name="email" [(ngModel)]="cliente1.email" #email="ngModel" placeholder="Ingresar email" required>
+                    </div>
+                </div>
+
+            </div>
+            <div class="footer">
+                <button type="reset" class="btn btn-success boton">Nuevo cliente</button>
+                <button type="submit" name="submit1" class="btn btn-info boton" (click)="saveCliente(f)">Guardar</button>
+                <button type="button" name="submit2" class="btn btn-danger boton" (click)="limpiarDialog()">volver</button>
+            </div>
+        </form>
+    </p-dialog>
+
+    <div class="row">
+        <p-dialog [(visible)]="displayModal" [style]="{width: '40vw'}">
+            <p-header>
+                <h3><i class="fas fa-edit espacio"></i>EDITAR DATOS DEl CLIENTE</h3>
+            </p-header>
+            <div class="form-group row">
+                <div class="row espaciado">
+                    <div class="col-md-3">
+                        <label for="nombre" class="form-label claslabel">Nombre:</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="clientedialog.nombre" #nombre="ngModel" placeholder="Nombre del cliente" required>
+                    </div>
+                </div>
+
+                <div class="row espaciado">
+                    <div class="col-md-3">
+                        <label for="apellido" class="form-label claslabel">Apellido:</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="apellido" name="apellido" [(ngModel)]="clientedialog.apellido" #apellido="ngModel" placeholder="Ingresar Nit" required>
+                    </div>
+                </div>
+
+                <div class="row espaciado">
+                    <div class="col-md-3">
+                        <label for="direccion" class="form-label claslabel">Direccion:</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="direccion" name="direccion" [(ngModel)]="clientedialog.direccion" #direccion="ngModel" placeholder="Ingresar direccion" required>
+                    </div>
+                </div>
+
+                <div class="row espaciado">
+                    <div class="col-md-3">
+                        <label for="telefono" class="form-label claslabel">Telefono:</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="number" class="form-control" id="telefono" name="telefono" [(ngModel)]="clientedialog.telefono" #telefono="ngModel" placeholder="Ingresar telefono" required>
+                    </div>
+                </div>
+
+                <div class="row espaciado">
+                    <div class="col-md-3">
+                        <label for="email" class="form-label claslabel">Correo:</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="email" class="form-control" id="email" name="email" [(ngModel)]="clientedialog.email" #email="ngModel" placeholder="Ingresar correo" required>
+                    </div>
+                </div>
+
+            </div>
+            <p-footer>
+                <button (click)="saveEditCliente()" class="btn btn-primary" type="button">
+                    <i class="fas fa-save espacio"></i>Guardar datos
+                </button>
+            </p-footer>
+        </p-dialog>
+    </div>
+</div>

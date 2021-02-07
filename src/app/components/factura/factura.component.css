@@ -1,0 +1,42 @@
+.minipuu {
+    display: flex;
+    background: #0dcaf0;
+    margin: 10px;
+    align-items: center;
+    padding: 8px;
+    border-radius: 3px;
+}
+
+.iconfactura {
+    width: 40px;
+    margin: 3px;
+}
+
+.espacio {
+    letter-spacing: 1px;
+    margin-left: 12px;
+}
+
+.header1 {
+    text-transform: uppercase;
+}
+
+.header2 {
+    margin-right: 5px;
+}
+
+.labelclas {
+    margin-top: 6px;
+}
+
+.row {
+    margin-top: 8px;
+}
+
+.rowdos {
+    margin-top: 20px;
+}
+
+::placeholder {
+    color: rgb(175, 171, 171);
+}

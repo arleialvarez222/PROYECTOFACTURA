@@ -1,0 +1,71 @@
+.padre {
+    display: flex;
+    background: #0dcaf0;
+    margin: 10px;
+    padding: 8px;
+    border-radius: 3px;
+    align-items: center;
+}
+
+.header {
+    margin-right: 5px;
+    letter-spacing: 1px;
+}
+
+.header1 {
+    text-transform: uppercase;
+}
+
+.margen {
+    margin-left: 15px;
+}
+
+.boton {
+    letter-spacing: 1px;
+}
+
+.row {
+    margin-bottom: 10px;
+}
+
+.rowdos {
+    margin-top: 15px;
+}
+
+.iconusuario {
+    margin-right: 5px;
+}
+
+.espacio {
+    margin-right: 5px;
+}
+
+.claselabel {
+    margin-top: 7px;
+}
+
+.span {
+    margin-bottom: 10px;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    padding: -10px;
+}
+
+.boton {
+    margin-right: 6px;
+}
+
+::placeholder {
+    color: rgb(175, 171, 171);
+}
+
+button {
+    letter-spacing: 1px;
+}
+
+.paginacion {
+    margin-bottom: 40px;
+}

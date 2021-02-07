@@ -1,0 +1,68 @@
+.padre {
+    display: flex;
+    background: #0dcaf0;
+    margin: 10px;
+    padding: 8px;
+    border-radius: 3px;
+    align-items: center;
+}
+
+.header1 {
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.header {
+    margin-right: 5px;
+}
+
+.row {
+    margin-bottom: 10px;
+}
+
+.rowdos {
+    margin-top: 20px;
+}
+
+button {
+    letter-spacing: 1px;
+}
+
+.labelclas {
+    margin-top: 8px;
+}
+
+.iconusuario {
+    margin: 3px;
+}
+
+.claselabel {
+    margin-top: 8px;
+}
+
+.espacio {
+    margin-right: 5px;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    padding: -10px;
+}
+
+.boton {
+    margin-right: 6px;
+}
+
+.span {
+    margin-bottom: 10px;
+}
+
+::placeholder {
+    color: rgb(175, 171, 171);
+}
+
+.clascontraseña {
+    padding-right: 5px;
+    color: #0dcaf0;
+}

@@ -1,0 +1,180 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 datoempresa">
+            <i class="fa fa-database datoempre" aria-hidden="true"></i>Datos de la empresa
+        </div>
+    </div>
+
+    <div class="row rowdos">
+        <div class="col-sm-3">
+            <img src="./assets/img/logo1.jpg" class="img" alt="">
+        </div>
+
+        <div class="col-sm-9 formu">
+            <form #f="ngForm">
+                <div class="form-group row">
+
+                    <div class="row espaciado">
+                        <div class="col-md-3">
+                            <label for="empresa" class="form-label claslabel">Empresa:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="empresa" name="empresa" [(ngModel)]="empresa.nombre" #nombre="ngModel" placeholder="Nombre de la empresa" required>
+                        </div>
+                    </div>
+
+                    <div class="row espaciado">
+                        <div class="col-md-3">
+                            <label for="nit" class="form-label claslabel">Nit:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="number" class="form-control" id="nit" name="nit" [(ngModel)]="empresa.nit" #nit="ngModel" placeholder="Ingresar Nit" required>
+                        </div>
+                    </div>
+
+                    <div class="row espaciado">
+                        <div class="col-md-3">
+                            <label for="propietario" class="form-label claslabel">Propietario:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="propietario" name="propietario" [(ngModel)]="empresa.propietario" #propietario="ngModel" placeholder="Ingresar propietario" required>
+                        </div>
+                    </div>
+
+                    <div class="row espaciado">
+                        <div class="col-md-3">
+                            <label for="telefono" class="form-label claslabel">Telefono:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="number" class="form-control" id="telefono" name="telefono" [(ngModel)]="empresa.telefono" #telefono="ngModel" placeholder="Ingresar telefono" required>
+                        </div>
+                    </div>
+
+                    <div class="row espaciado">
+                        <div class="col-md-3">
+                            <label for="email" class="form-label claslabel">Correo:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="empresa.email" #email="ngModel" placeholder="Ingresar correo" required>
+                        </div>
+                    </div>
+
+                    <div class="row espaciado">
+                        <div class="col-md-3">
+                            <label for="direccion" class="form-label claslabel">Direccion:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="direccion" name="direccion" [(ngModel)]="empresa.direccion" #direccion="ngModel" placeholder="Ingresar direccion" required>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 boton">
+                        <button type="submit" class="btn btn-info" (click)="guardarDatos(f)">Guardar datos</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row tabla">
+        <table class="table table-ligth table-hover">
+            <thead>
+                <tr>
+                    <th scope="col" class="tabla86"> Id </th>
+                    <th scope="col" class="tabla87"> Empresa </th>
+                    <th scope="col" class="tabla88"> Nit </th>
+                    <th scope="col" class="tabla89"> Propietario </th>
+                    <th scope="col" class="tabla90"> Telefono </th>
+                    <th scope="col" class="tabla91"> Correo </th>
+                    <th scope="col" class="tabla92"> Direccion </th>
+                    <th scope="col" class="tabla93"></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr *ngFor="let item of empresas">
+                    <td scope="row">{{ item.id }}</td>
+                    <td>{{ item.nombre | capitalizado: true }}</td>
+                    <td>{{ item.nit }}</td>
+                    <td>{{ item.propietario | capitalizado: true}}</td>
+                    <td>{{ item.telefono }}</td>
+                    <td>{{ item.email }}</td>
+                    <td>{{ item.direccion | capitalizado:false }}</td>
+                    <td>
+                        <i (click)="openEditEmpresa(item)" class="fas fa-edit btn btn-outline-primary iconos"></i>
+                        <i (click)="eliminarEmpresa(item)" class="fas fa-trash-alt btn btn-outline-danger "></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p-dialog [(visible)]="displayModal" [style]="{width: '40vw'}">
+        <p-header>
+            <h3><i class="fas fa-edit espacio"></i>EDITAR DATOS DE LA EMPRESA</h3>
+        </p-header>
+        <div class="form-group row">
+            <div class="row espaciado">
+                <div class="col-md-3">
+                    <label for="empresa" class="form-label claslabel">Empresa:</label>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" id="empresa" name="empresa" [(ngModel)]="empresadialog.nombre" #nombre="ngModel" placeholder="Nombre de la empresa" required>
+                </div>
+            </div>
+
+            <div class="row espaciado">
+                <div class="col-md-3">
+                    <label for="nit" class="form-label claslabel">Nit:</label>
+                </div>
+                <div class="col-md-9">
+                    <input type="number" class="form-control" id="nit" name="nit" [(ngModel)]="empresadialog.nit" #nit="ngModel" placeholder="Ingresar Nit" required>
+                </div>
+            </div>
+
+            <div class="row espaciado">
+                <div class="col-md-3">
+                    <label for="propietario" class="form-label claslabel">Propietario:</label>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" id="propietario" name="propietario" [(ngModel)]="empresadialog.propietario" #propietario="ngModel" placeholder="Ingresar propietario" required>
+                </div>
+            </div>
+
+            <div class="row espaciado">
+                <div class="col-md-3">
+                    <label for="telefono" class="form-label claslabel">Telefono:</label>
+                </div>
+                <div class="col-md-9">
+                    <input type="number" class="form-control" id="telefono" name="telefono" [(ngModel)]="empresadialog.telefono" #telefono="ngModel" placeholder="Ingresar telefono" required>
+                </div>
+            </div>
+
+            <div class="row espaciado">
+                <div class="col-md-3">
+                    <label for="email" class="form-label claslabel">Correo:</label>
+                </div>
+                <div class="col-md-9">
+                    <input type="email" class="form-control" id="email" name="email" [(ngModel)]="empresadialog.email" #email="ngModel" placeholder="Ingresar correo" required>
+                </div>
+            </div>
+
+            <div class="row espaciado">
+                <div class="col-md-3">
+                    <label for="direccion" class="form-label claslabel">Direccion:</label>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" id="direccion" name="direccion" [(ngModel)]="empresadialog.direccion" #direccion="ngModel" placeholder="Ingresar direccion" required>
+                </div>
+            </div>
+        </div>
+        <p-footer>
+            <button (click)="saveEditEmpresa()" class="btn btn-primary" type="button">
+                <i class="fas fa-save espacio"></i>Guardar datos
+            </button>
+        </p-footer>
+    </p-dialog>
+</div>
