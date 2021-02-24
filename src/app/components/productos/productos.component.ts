@@ -18,8 +18,8 @@ export class ProductosComponent implements OnInit {
   products: ProductosBase[] = [];
   productDialog: ProductosUpdateRequestDTO = new ProductosUpdateRequestDTO();
   displayModal: boolean = false;
-  
-  //variables del pipe pagination 
+
+  //variables del pipe pagination
   page_size: any = 5;
   page_number: number = 1;
   pageSizeOptions = [5, 10, 20]
@@ -50,7 +50,7 @@ export class ProductosComponent implements OnInit {
     );
   }
   saveproduct(form: NgForm) {
-    if (form.invalid) { 
+    if (form.invalid) {
       this.toastr.warning(
         'Todos los campos sson obligatorios',
         'ERROR',
@@ -58,11 +58,11 @@ export class ProductosComponent implements OnInit {
           positionClass: 'toast-bottom-right',
         }
       );
-    } 
+    }
     else {
-      /* this.product.fechaVencimiento = moment(
+      this.product.fechaVencimiento = moment(
         this.product.fechaVencimiento
-      ).toDate(); */
+      ).toDate();
       this._client.producto(this.product).subscribe(
         (data) => {
           this.getAllProducts();
@@ -85,15 +85,15 @@ export class ProductosComponent implements OnInit {
         }
       );
     }
-    
+
   }
 
   deleteProduct(item: ProductosBase) {
-    
+
     this._client.producto4(item.id).subscribe(
       (data) => {
         this.getAllProducts();
-       
+
         this.toastr.success(
           'El producto se a eliminado exitosamente',
           'ELIMINADO',
@@ -112,7 +112,7 @@ export class ProductosComponent implements OnInit {
         );
       }
     );
-  } 
+  }
 
   abrirEditProduct(item: ProductosUpdateRequestDTO) {
     this.displayModal = true;
@@ -150,8 +150,8 @@ export class ProductosComponent implements OnInit {
         );
       }
     );
-  } 
-  
+  }
+
   showDialog() {
     this.display = true;
   }
@@ -167,12 +167,12 @@ export class ProductosComponent implements OnInit {
     this.product.precioMaximo = 0;
     /* this.product.fechaVencimiento = ''; */
     this.product.categoriaId = 0;
-    
+
   }
   //funcion del paginator
   handlePage(e: PageEvent) {
     this.page_size = e.pageSize;
     this.page_number = e.pageIndex + 1;
   }
- 
+
 }

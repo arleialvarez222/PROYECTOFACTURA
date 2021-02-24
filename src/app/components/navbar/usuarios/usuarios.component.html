@@ -50,7 +50,7 @@
                         <td> {{ item.direccion | capitalizado:false }} </td>
                         <td> {{ item.telefono }} </td>
                         <td> {{ item.usuario }} </td>
-                        <td> <i (click)="activar = !activar" class="fas fa-eye clascontraseña"></i> {{ item.contrasena | contrasena:activar }}
+                        <td> <i class="fas fa-eye clascontraseña"></i> {{ item.contrasena | contrasena:activar }}
                         </td>
                         <td> {{ item.empresaId }} </td>
                         <td>
@@ -123,7 +123,7 @@
                         <label for="contrasena" class="form-label claselabel">Contraseña:</label>
                     </div>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" id="contrasena" name="contrasena" [(ngModel)]="empleado.contrasena" #contrasena="ngModel" placeholder="Ingresar contraseña" required>
+                        <input type="password" class="form-control" id="contrasena" name="contrasena" [(ngModel)]="empleado.contrasena" #contrasena="ngModel" placeholder="Ingresar contraseña" required>
                     </div>
                 </div>
 
@@ -200,7 +200,7 @@
                     <label for="contrasena" class="form-label claslabel">Contraseña:</label>
                 </div>
                 <div class="col-md-9">
-                    <input type="text" class="form-control" id="contrasena" name="contrasena" [(ngModel)]="empleadoDialog.contrasena" #contrasena="ngModel" placeholder="Ingresar correo" required>
+                    <input type="password" class="form-control" id="contrasena" name="contrasena" [(ngModel)]="empleadoDialog.contrasena" #contrasena="ngModel" placeholder="Ingresar correo" required>
                 </div>
             </div>
 

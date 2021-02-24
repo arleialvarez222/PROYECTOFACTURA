@@ -4633,7 +4633,7 @@ export class ProductosUpdateRequestDTO implements IProductosUpdateRequestDTO {
         data["precioActual"] = this.precioActual;
         data["precioMinimo"] = this.precioMinimo;
         data["precioMaximo"] = this.precioMaximo;
-        data["fechaVencimiento"] = this.fechaVencimiento ? this.fechaVencimiento.toISOString() : <any>undefined;
+        data["fechaVencimiento"] = this.fechaVencimiento ? this.fechaVencimiento : <any>undefined;
         data["categoriaId"] = this.categoriaId;
         return data;
     }

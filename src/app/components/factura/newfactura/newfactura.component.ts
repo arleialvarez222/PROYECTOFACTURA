@@ -148,7 +148,7 @@ export class NewfacturaComponent implements OnInit {
         console.log(this.detalleFactura);
       },
       (error) => {
-        this.toastr.warning('Factura guardada', 'EXCELENTE', {
+        this.toastr.warning('Error al guardar factura', 'ERROR', {
           positionClass: 'toast-bottom-right',
         });
         console.log(error);
