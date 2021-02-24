@@ -4,5 +4,13 @@
 }
 
 .h3navbar {
+    justify-content: center;
     padding: 0px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 20px;
+}
+
+nav {
+    height: 50px;
 }
